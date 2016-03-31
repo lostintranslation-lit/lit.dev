@@ -1,9 +1,6 @@
-<?php 
-
-// marketing homepage
+<?php  
 
 ?>
-
 
 <!DOCTYPE html>
 
@@ -11,7 +8,7 @@
 
 	<head>
 	
-		<title>index.php</title>
+		<title></title>
 		
 		<meta charset="utf8">
 
