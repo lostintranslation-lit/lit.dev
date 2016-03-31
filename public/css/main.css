@@ -1,0 +1,45 @@
+/*establish styling for navbar*/
+div#navbar {
+	width: 100%;
+}
+	/*establish styling for ul*/
+	div#navbar ul {
+		list-style-type: none;
+	}
+
+	/*establish styling for "a" element*/
+	div#navbar ul li a {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 1.1em;
+		font-weight: 900;
+		text-decoration: none;
+		color: white;
+		display: block;
+		padding: .75em;
+	}
+
+	/*establish styling for li*/
+	div#navbar ul li {
+		text-align: center;
+		display: inline;
+		width: 32%;
+		float: left;
+		margin-right: .5em;
+	}
+
+	/*create styling for special li class*/
+	li.changeBackground {
+		background-color: #B80000;
+	}
+	li.changeBackground:hover {
+		background-color: #F80000;
+	}
+	li.changeBackground:active {
+		background-color: #880000;
+	}
+
+
+
+
+
+

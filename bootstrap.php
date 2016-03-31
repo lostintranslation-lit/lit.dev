@@ -1,3 +1,3 @@
 <?php 
 
-include_once 'views/partials/header.php';
+include_once 'views/partials/navbar.php';
