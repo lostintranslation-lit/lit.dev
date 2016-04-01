@@ -19,9 +19,9 @@
 		
 		<div id="navbar">
 			<ul>
-			  <li class="changeBackground"><a href="i-saw-the-sign.html">I saw the sign . . .</a></li>
-			  <li class="changeBackground"><a href="eat-here.html">Eat Here!</a></li>
-			  <li class="changeBackground"><a href="movies-for-500.html">Movies for $500</a></li>
+			  <li class="changeBackground"><a href="sign.html">Sad Signs</a></li>
+			  <li class="changeBackground"><a href="tatoo.html">Terrible Tatoos</a></li>
+			  <li class="changeBackground"><a href="tbd.html">TBD</a></li>
 			</ul>
 		</div>
 		</div>
