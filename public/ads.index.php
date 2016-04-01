@@ -13,7 +13,7 @@
 		<title>Splash</title>
 
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="/css/splash.css">
+		<link rel="stylesheet" href="/css/luis.css">
 		
 	</head>
 
