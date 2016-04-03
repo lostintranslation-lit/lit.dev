@@ -1,15 +1,15 @@
 body {
-	background-image: url(/img/Luis_Pic/29.jpg);
-	background-size: 650px 650px;
+	background-image: url(/img/Luis_Pic/29.png);
+	background-size: 350px 350px;
 	background-repeat: no-repeat;
-	background-position: center top;
+	background-position: right top;
 	color: #ffcc66;
 	font-style: oblique;
-	text-align: center;
+	text-align: left;
 	bottom: 0;
 }
 
-h1 {
+/*h1 {
 	text-align: center;
 	font-size: 400%;
-}
+}*/
