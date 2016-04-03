@@ -8,14 +8,16 @@ include_once "../bootstrap.php"
 
 	<head>
 
-		<title>View of Individual Ad</title>
+		<title>ads.show.php</title>
 		<meta charset="utf-8">
 
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 
-		
+
+		<?= $font_links;  ?>
 
 		<style type="text/css">
+
 
 
 		</style>	
