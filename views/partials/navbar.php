@@ -1,8 +1,6 @@
 <?php  
 
 
-
-
 ?>		
 
 <div id="navbar">
@@ -13,6 +11,3 @@
 	  <li class="changeBackground"><a href="/ads.edit.php">edit this yo!</a></li>
 	</ul>
 </div>
-
-
-

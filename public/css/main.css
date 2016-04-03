@@ -65,8 +65,16 @@
 		background-color: #880000;
 	}
 
-
-
+/*establish styling for language buttons*/
+    div#language {
+        font-family: Arial, Helvetica, sans-serif;
+		font-size: 1.5em;
+		font-weight: 400;
+		text-decoration: none;
+		/*color: white;*/
+		padding: .75em;
+    }
+    	
 
 /*establish styling for remaining body*/
 body {
