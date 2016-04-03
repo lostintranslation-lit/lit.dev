@@ -9,27 +9,36 @@ include_once "../bootstrap.php"
 	<head>
 
 		<title>View of Individual Ad</title>
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+
+		
 
 		<style type="text/css">
 
-			body{
-
-				color: floralwhite;
-
-				background-image: url(/img/LiT_logo.jpg); 
-				background-size: cover;
-				background-repeat: no-repeat;
-	
-			}
 
 		</style>	
-		<meta charset="utf-8">
 
 	</head>
 
 	<body>
 
-		<h1>this will work</h1>
+		<!-- this is the navbar -->
+		<?php include_once '../views/partials/navbar.php'; ?>
+		
+		<div class="flexbox page_title">
+			
+			<h1>here is a list of the goodies</h1>
+
+		</div>
+		
+		<div class="flexbox page_content">
+
+			<h2>some sweet adds</h2>
+
+		</div>
+
 	</body>
 
 </html>
