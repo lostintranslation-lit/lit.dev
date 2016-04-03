@@ -95,7 +95,9 @@ h1 {
 }	
 
 .page_content {
-
+/*anna, i added "justify-content: center" otherwise the photo won't appear 
+even if ".page_title" is within ".page_content"*/
+	justify-content: center;
 	width: 90%;
 	padding:5%;
 }
