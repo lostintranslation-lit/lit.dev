@@ -18,6 +18,11 @@
 	<header>
             <h1> Choose a language</h1>
     </header>
+   
+    <section class="login_form"
+	           
+    <form method="GET" action="/my_first_form.php">
+
 
 
 <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -35,9 +40,7 @@
 	 </label>
 </form>
 </div>
-<div id="language">
 <p><button type="send">Send</button></p>
-</div>
 
 </body>
 </html>
