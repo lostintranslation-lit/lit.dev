@@ -3,7 +3,16 @@
 class Ad extends BaseModel
 {
 
-	/** Insert a new entry into the database */
+	protected static $table_name = 'lit'; 
+
+
+    public function __construct()
+    {
+        // static::$table_name = 'lit';
+        parent::__construct();
+    }
+
+    /** Insert a new entry into the database */
     protected function insert()
     {
     
@@ -25,7 +34,6 @@ class Ad extends BaseModel
             $stmt->bindValue(':type_id',  $this->attributes['type_id'],  PDO::PARAM_INT);
 
             $stmt->execute();
-
     }
 
 
@@ -36,27 +44,27 @@ class Ad extends BaseModel
      *
      * @return User An instance of the User class with attributes array set to values from the database
      */
-    public static function find($id)
-    {
-        // Get connection to the database --- why?
-        // self::dbConnect();
+    // public static function find($id)
+    // {
+    //     // Get connection to the database --- why?
+    //     // self::dbConnect();
 
        
-        $stmt = self::$dbc->prepare('SELECT * FROM '."$this->name".' WHERE id = :id');
-        $stmt->bindValue(':id',  $id,  PDO::PARAM_INT);
+    //     $stmt = self::$dbc->prepare('SELECT * FROM '. self::$table_name .' WHERE id = :id');
+    //     $stmt->bindValue(':id',  $id,  PDO::PARAM_INT);
 
 
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $stmt->execute();
+    //     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // The following code will set the attributes on the calling object based on the result variable's contents
-        $instance = null;
+    //     // The following code will set the attributes on the calling object based on the result variable's contents
+    //     $instance = null;
 
-        if ($result) {
-            $instance = new static($result);
-        }
-        return $instance;
-    }
+    //     if ($result) {
+    //         $instance = new static($result);
+    //     }
+    //     return $instance;
+    // }
 
     /**
      * Find all records in a table
@@ -65,11 +73,37 @@ class Ad extends BaseModel
      */
     public static function all()
     {
-        $stmt = self::$dbc->query('SELECT * FROM '."'"."$this->name"."'");
+        $stmt = self::$dbc->query('SELECT * FROM '. self::$table_name);
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
+    }
+
+    public static function getLuisScoreImg($id)
+    {    
+        $dbstmt = <<<EOD
+
+        SELECT img_file 
+        FROM luis 
+        WHERE id IN(
+            SELECT luis_score
+            FROM lit 
+            WHERE id = :id
+        );
+EOD;
+
+
+        $stmt = self::$dbc->prepare($dbstmt);
+        $stmt->bindValue(':id',  $id,  PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        if (array_key_exists('img_file', $result)) {
+            return $result['img_file']; 
+        }
+            return NULL;
     }
 
 }
