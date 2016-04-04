@@ -2,6 +2,9 @@
 
 
 include_once 'views/partials/navbar.php';
+require_once 'utils/Input.php';
+require_once __DIR__ . 'BaseModel.php';
+require_once __DIR__ . 'Ad.php';
 
 
 // font links
