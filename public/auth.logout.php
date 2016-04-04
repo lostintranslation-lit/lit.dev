@@ -1,4 +1,13 @@
 <?php 
+
+session_start();
+require_once "../utils/Auth.php";
+
+var_dump($_SESSION);
+
+Auth::logout();
+header('Location: /auth.login.php');
+die();
 ?>	
 
 <!DOCTYPE html>

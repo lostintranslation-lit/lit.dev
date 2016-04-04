@@ -23,12 +23,26 @@ DROP TABLE IF EXISTS lang;
 CREATE TABLE lang (
 
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    lang VARCHAR(10) NOT NULL, 
+    lang VARCHAR(20) NOT NULL, 
     PRIMARY KEY (id)
 );
 
 TRUNCATE lang;
-INSERT INTO lang (lang) VALUES ('English'),('Spanish'),('Hebrew');
+INSERT INTO lang (lang) VALUES ('English'),('Spanish'),('Hebrew'),('Chinese Characters');
+
+
+-- give each item a luis score
+DROP TABLE IF EXISTS luis;
+
+CREATE TABLE luis (
+
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    score VARCHAR(20) NOT NULL, 
+    PRIMARY KEY (id)
+);
+
+TRUNCATE luis;
+INSERT INTO luis (score) VALUES ('good_2.png'),('bad_5.png');
 
 
 
@@ -44,10 +58,12 @@ CREATE TABLE lit (
     description  VARCHAR(1000) NOT NULL,
     img VARCHAR(50) DEFAULT 'NONE',
     type_id INT UNSIGNED DEFAULT NULL,
+    luis_score INT UNSIGNED DEFAULT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (type_id) REFERENCES type (id),
     FOREIGN KEY (lang_origin) REFERENCES lang (id),
-    FOREIGN KEY (lang_trans) REFERENCES lang (id)
+    FOREIGN KEY (lang_trans) REFERENCES lang (id),
+    FOREIGN KEY (luis_score) REFERENCES luis (id)
 );
 
 SET foreign_key_checks = 1;
