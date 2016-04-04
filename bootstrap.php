@@ -3,8 +3,8 @@
 
 include_once 'views/partials/navbar.php';
 require_once 'utils/Input.php';
-require_once __DIR__ . 'BaseModel.php';
-require_once __DIR__ . 'Ad.php';
+require_once 'models/BaseModel.php';
+require_once 'models/Ad.php';
 
 
 // font links
