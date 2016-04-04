@@ -3,7 +3,17 @@ include_once "../bootstrap.php";
 	
 	$type = Input::get('type');
 
-	$list_item = [['check some',1],['more stuff',3], ['this is great',5]];
+	$ad_list = new Ad('lit');
+
+	// var_dump($ad_list);
+
+	// var_dump(Ad::all());
+
+	$list_item = Ad::all();
+
+	// var_dump(Ad::getLuisScoreImg(1));
+
+	
 
 ?>
 
@@ -55,8 +65,9 @@ include_once "../bootstrap.php";
 		<div id="ad_index" class="flexbox page_content"> 
 		
 			<?php foreach ($list_item as $key => $value):?>
-	
-				<div class="list_item"><h3><?=$key; ?></h3><h3><?= $value[0]; ?></h3> <img src="img/Luis_Pic/1.png" style="width:50px;height:50px;"></div>
+
+				<?php  $id = intval($value['id']) ?>	
+				<div class="list_item"><h3><?=$value['id']; ?></h3><h3><?= $value['label']; ?></h3> <img <?= 'src="img/Luis_Pic/' . Ad::getLuisScoreImg($id) .'"';?>" style="width:50px;height:50px;"></div>
 
 			<?php endforeach; ?>
 		

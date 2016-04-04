@@ -6,15 +6,11 @@ abstract class BaseModel
 	protected static $dbc = null;
 	protected $attributes = array();
 	
-	// this is the table name
-	protected $name;
 
 
-	public function __construct($name, array $attributes = array())
+	public function __construct(array $attributes = array())
 	{
 		self::dbConnect();
-
-		$this->name = $name;
 		$this->attributes = $attributes;
 
 	}

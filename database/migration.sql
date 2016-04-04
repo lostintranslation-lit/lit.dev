@@ -38,11 +38,12 @@ CREATE TABLE luis (
 
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     score VARCHAR(20) NOT NULL, 
+    img_file VARCHAR(20) NOT NULL,
     PRIMARY KEY (id)
 );
 
 TRUNCATE luis;
-INSERT INTO luis (score) VALUES ('good_2.png'),('bad_5.png');
+INSERT INTO luis (score, img_file) VALUES ('good', '2.png'),('bad', '5.png');
 
 
 
