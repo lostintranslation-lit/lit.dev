@@ -3,19 +3,17 @@ USE lit_db;
 SET foreign_key_checks = 0;
 
 -- table of types of translations, foreign key on lit
-DROP TABLE IF EXISTS type;
+DROP TABLE IF EXISTS typet;
 
-CREATE TABLE type (
+CREATE TABLE typet (
 
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     typet VARCHAR(10) NOT NULL, 
     PRIMARY KEY (id)
 );
 
-TRUNCATE type;
-INSERT INTO type (typet) VALUES ('tattoo'),('sign');
-
-
+TRUNCATE typet;
+INSERT INTO typet (typet) VALUES ('tattoo'),('sign');
 
 -- table of languages, foreign key on lit used twice
 DROP TABLE IF EXISTS lang;
@@ -45,19 +43,17 @@ CREATE TABLE luis (
 TRUNCATE luis;
 INSERT INTO luis (score, img_file) VALUES ('good', '2.png'),('bad', '5.png');
 
-
-
 -- table of translation entries
 DROP TABLE IF EXISTS lit;
 
 CREATE TABLE lit (
 
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    label VARCHAR(15) NOT NULL, 
+    label VARCHAR(100) NOT NULL, 
     lang_origin INT UNSIGNED DEFAULT NULL, 
     lang_trans INT UNSIGNED DEFAULT NULL,
     description  VARCHAR(1000) NOT NULL,
-    img VARCHAR(50) DEFAULT 'NONE',
+    img_file VARCHAR(50) DEFAULT 'NONE',
     type_id INT UNSIGNED DEFAULT NULL,
     luis_score INT UNSIGNED DEFAULT NULL,
     PRIMARY KEY (id),
@@ -68,3 +64,18 @@ CREATE TABLE lit (
 );
 
 SET foreign_key_checks = 1;
+
+-- table of users and passwords
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE user (
+
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    username VARCHAR(10) NOT NULL,
+    password VARCHAR(10) NOT NULL, 
+    PRIMARY KEY (id)
+);
+
+TRUNCATE user;
+INSERT INTO user (username) VALUES ('password');
