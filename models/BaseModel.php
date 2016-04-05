@@ -5,6 +5,7 @@ abstract class BaseModel
 
 	protected static $dbc = null;
 	protected $attributes = array();
+    protected static $table_name;
 	
 
 
@@ -15,7 +16,7 @@ abstract class BaseModel
 
 	}
 
-	public function dbConnect() 
+	public static function dbConnect() 
 	{
 		if (!self::$dbc) {
 			
@@ -54,22 +55,22 @@ abstract class BaseModel
     }
 
     /** Store the object in the database */
-    // public function save()
-    // {
+    public function save()
+    {
         
-    //     if(!empty($this->attributes)) {  
+        if(!empty($this->attributes)) {  
             
-    //         if (array_key_exists('id', $this->attributes)) {
+            if (array_key_exists('id', $this->attributes)) {
                
-    //             $this->update();
+                $this->update();
 
-    //         } else {
+            } else {
 
-    //             $this->insert();
-    //         }
+                $this->insert();
+            }
 
-    //     }
-    // }
+        }
+    }
 
     /**
      * Insert new entry into database
@@ -86,16 +87,24 @@ abstract class BaseModel
     protected abstract function update();
 
 
+    public static function truncate($table_name)
+    {
+        self::dbConnect();
 
-    // public static function delete($id) {
+        $query = "TRUNCATE $table_name;";
+        self::$dbc->exec($query);
 
-    //     self::dbConnect();
+    }
+    
+    public static function delete($id, $table_name) {
 
-    //     $stmt = self::$dbc->prepare('DELETE FROM Users WHERE id = :id');
-    //     $stmt->bindValue(':id',  $id,  PDO::PARAM_INT);
+        self::dbConnect();
+        
+        $stmt = self::$dbc->prepare("DELETE FROM $table_name WHERE id = :id");
+        $stmt->bindValue(':id',  $id,  PDO::PARAM_INT);
 
-    //     $stmt->execute();
+        $stmt->execute();
 
-    // }
+    }
 }
 

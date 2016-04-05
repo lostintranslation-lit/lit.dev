@@ -3,17 +3,12 @@ include_once "../bootstrap.php";
 	
 	$type = Input::get('type');
 
-	$ad_list = new Ad('lit');
+	if (Input::has('type')) {
 
-	// var_dump($ad_list);
+		$list_item = Ad::getFromForKey('*', 'type_id', 'typet', 'typet', $type);	
 
-	// var_dump(Ad::all());
+	}
 
-	$list_item = Ad::all();
-
-	// var_dump(Ad::getLuisScoreImg(1));
-
-	
 
 ?>
 
@@ -67,7 +62,8 @@ include_once "../bootstrap.php";
 			<?php foreach ($list_item as $key => $value):?>
 
 				<?php  $id = intval($value['id']) ?>	
-				<div class="list_item"><h3><?=$value['id']; ?></h3><h3><?= $value['label']; ?></h3> <img <?= 'src="img/Luis_Pic/' . Ad::getLuisScoreImg($id) .'"';?>" style="width:50px;height:50px;"></div>
+				<div class="list_item"><h3><?=$value['id']; ?></h3><h3><?= $value['label']; ?></h3> <img <?= 'src="img/Luis_Pic/' . Ad::getForKeyCol($id,'luis_score','luis','img_file') .'"';?>" style="width:50px;height:50px;"></div>
+
 
 			<?php endforeach; ?>
 		
