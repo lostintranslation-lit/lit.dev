@@ -5,13 +5,6 @@ class Ad extends BaseModel
 
 	protected static $table_name = 'lit'; 
 
-
-    public function __construct()
-    {
-        // static::$table_name = 'lit';
-        parent::__construct();
-    }
-
     /** Insert a new entry into the database */
     protected function insert()
     {
@@ -24,16 +17,35 @@ class Ad extends BaseModel
     /** Update existing entry in the database */
     protected function update()
     {
-        $stmt = self::$dbc->prepare('INSERT INTO lit (label, lang_origin, lang_trans, description, img, type_id, luis_score) VALUES (:label, :lang_origin, :lang_trans, :description, :img, :type_id, :luis_score)');
+        $query = "SET foreign_key_checks = 0;";
+        self::$dbc->exec($query);
+
+
+        $stmt = self::$dbc->prepare('INSERT INTO lit (label, lang_origin, lang_trans, description, img_file, type_id, luis_score) VALUES (:label, :lang_origin, :lang_trans, :description, :img_file, :type_id, :luis_score)');
 
             $stmt->bindValue(':label', $this->attributes['label'], PDO::PARAM_STR);
             $stmt->bindValue(':lang_origin',  $this->attributes['lang_origin'],  PDO::PARAM_INT);
             $stmt->bindValue(':lang_trans',  $this->attributes['lang_trans'],  PDO::PARAM_INT);
             $stmt->bindValue(':description',  $this->attributes['description'],  PDO::PARAM_STR);
-            $stmt->bindValue(':img',  $this->attributes['img'],  PDO::PARAM_INT);
+            $stmt->bindValue(':img_file',  $this->attributes['img_file'],  PDO::PARAM_STR);
             $stmt->bindValue(':type_id',  $this->attributes['type_id'],  PDO::PARAM_INT);
+            $stmt->bindValue(':luis_score',  $this->attributes['luis_score'],  PDO::PARAM_INT);
 
             $stmt->execute();
+
+
+            // $stmt->bindValue(':label', $this->attributes['label'], PDO::PARAM_STR);
+            // $stmt->bindValue(':lang_origin',  1,  PDO::PARAM_INT);
+            // $stmt->bindValue(':lang_trans',  1,  PDO::PARAM_INT);
+            // $stmt->bindValue(':description',  $this->attributes['description'],  PDO::PARAM_STR);
+            // $stmt->bindValue(':img_file',  $this->attributes['img_file'],  PDO::PARAM_STR);
+            // $stmt->bindValue(':type_id',  1,  PDO::PARAM_INT);
+            // $stmt->bindValue(':luis_score', 1,  PDO::PARAM_INT);
+
+            // $stmt->execute();
+
+        $query = "SET foreign_key_checks = 1;";
+        self::$dbc->exec($query);
     }
 
 
@@ -73,6 +85,9 @@ class Ad extends BaseModel
      */
     public static function all()
     {
+        
+        self::dbConnect();
+
         $stmt = self::$dbc->query('SELECT * FROM '. self::$table_name);
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -80,30 +95,63 @@ class Ad extends BaseModel
         return $result;
     }
 
-    public static function getLuisScoreImg($id)
+    // returns the specified forgin key column based on the lit table id
+    public static function getForKeyCol($id, $col, $f_table, $f_col)
     {    
-        $dbstmt = <<<EOD
+        
+        self::dbConnect();
 
-        SELECT img_file 
-        FROM luis 
+        $table = static::$table_name;
+
+        $query = <<<EOD
+
+        SELECT $f_col 
+        FROM $f_table 
         WHERE id IN(
-            SELECT luis_score
-            FROM lit 
-            WHERE id = :id
+            SELECT $col
+            FROM $table
+            WHERE id = $id
         );
 EOD;
 
 
-        $stmt = self::$dbc->prepare($dbstmt);
-        $stmt->bindValue(':id',  $id,  PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt = self::$dbc->query($query);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-        if (array_key_exists('img_file', $result)) {
-            return $result['img_file']; 
+        if (array_key_exists($f_col , $result)) {
+            return $result[$f_col]; 
         }
             return NULL;
     }
+
+    // returns the set of lit items based on a forgin key input
+    public static function getFromForKey($select, $col, $f_table, $f_col, $f_col_val)
+    {    
+       
+        self::dbConnect();
+        $table = static::$table_name;
+
+        $query = <<<EOD
+
+        SELECT $select 
+        FROM $table 
+        WHERE $col IN(
+            SELECT id
+            FROM $f_table
+            WHERE $f_col = '$f_col_val'
+        );
+EOD;
+
+        $stmt = self::$dbc->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        if (isset($result)) {
+            return $result; 
+        }
+            return NULL;
+    }
+
+
 
 }

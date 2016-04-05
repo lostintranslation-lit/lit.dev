@@ -3,17 +3,17 @@ USE lit_db;
 SET foreign_key_checks = 0;
 
 -- table of types of translations, foreign key on lit
-DROP TABLE IF EXISTS type;
+DROP TABLE IF EXISTS typet;
 
-CREATE TABLE type (
+CREATE TABLE typet (
 
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     typet VARCHAR(10) NOT NULL, 
     PRIMARY KEY (id)
 );
 
-TRUNCATE type;
-INSERT INTO type (typet) VALUES ('tattoo'),('sign');
+TRUNCATE typet;
+INSERT INTO typet (typet) VALUES ('tattoo'),('sign');
 
 -- table of languages, foreign key on lit used twice
 DROP TABLE IF EXISTS lang;
@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS lit;
 CREATE TABLE lit (
 
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    label VARCHAR(15) NOT NULL, 
+    label VARCHAR(100) NOT NULL, 
     lang_origin INT UNSIGNED DEFAULT NULL, 
     lang_trans INT UNSIGNED DEFAULT NULL,
     description  VARCHAR(1000) NOT NULL,
