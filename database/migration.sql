@@ -15,8 +15,6 @@ CREATE TABLE typet (
 TRUNCATE typet;
 INSERT INTO typet (typet) VALUES ('tattoo'),('sign');
 
-
-
 -- table of languages, foreign key on lit used twice
 DROP TABLE IF EXISTS lang;
 
@@ -45,8 +43,6 @@ CREATE TABLE luis (
 TRUNCATE luis;
 INSERT INTO luis (score, img_file) VALUES ('good', '2.png'),('bad', '5.png');
 
-
-
 -- table of translation entries
 DROP TABLE IF EXISTS lit;
 
@@ -68,3 +64,18 @@ CREATE TABLE lit (
 );
 
 SET foreign_key_checks = 1;
+
+-- table of users and passwords
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE user (
+
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    username VARCHAR(10) NOT NULL,
+    password VARCHAR(10) NOT NULL, 
+    PRIMARY KEY (id)
+);
+
+TRUNCATE user;
+INSERT INTO user (username) VALUES ('password');
