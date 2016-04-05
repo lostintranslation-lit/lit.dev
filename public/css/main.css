@@ -102,6 +102,61 @@ even if ".page_title" is within ".page_content"*/
 	padding:5%;
 }
 
+/*styling for the edit page*/
+input[type=text] {  
+	border: 3px solid #B80000;
+	border-radius: 6px;
+	focus: none;
+}
+
+input[type=text]:focus {
+	border: 4px solid #F80000;
+	background-color: #ffcccc;
+	outline: none;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+select {
+	border: 3px solid #B80000;
+	color: #808080;
+}
+
+select:focus {
+	border: 4px solid #F80000;
+	background-color: #ffcccc;
+	outline: none;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+textarea {
+	border: 3px solid #B80000;
+	border-radius: 6px;
+	resize: none;
+}
+
+textarea:focus {
+	border: 4px solid #F80000;
+	background-color: #ffcccc;
+	outline: none;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+input[type=submit] {
+	border: 3px solid #B80000;
+	border-radius: 6px;
+	resize: none;
+	background-color: #FFFFFF;
+	color: none;
+}
+
+input[type=submit]:focus {
+	border: 4px solid #F80000;
+	background-color: #ffcccc;
+	outline: none;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+
 
 
 
