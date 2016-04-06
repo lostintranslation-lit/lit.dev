@@ -1,7 +1,5 @@
 <?php 
-
 include_once "../bootstrap.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +17,8 @@ include_once "../bootstrap.php";
 	</head>
 
 	<body>
+		<?php include_once "../views/partials/navbar.php";?>
+		<h1>User Profile</h1>
 
 		<div class='flexbox page_content'>
 			<img src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/>
