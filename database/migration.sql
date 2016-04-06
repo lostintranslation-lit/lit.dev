@@ -67,7 +67,7 @@ SET foreign_key_checks = 1;
 
 -- table of users and passwords
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS user;
 
 CREATE TABLE user (
 
@@ -78,4 +78,4 @@ CREATE TABLE user (
 );
 
 TRUNCATE user;
-INSERT INTO user (username) VALUES ('password');
+INSERT INTO user (username, password) VALUES ('username','password');

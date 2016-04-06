@@ -41,6 +41,7 @@ function pageController()
 	</head>
 
 	<body>
+		<?php include_once '../views/partials/navbar.php'; ?>
 		<h1>Log In</h1>
 
 		<form method="POST">

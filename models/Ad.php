@@ -34,16 +34,6 @@ class Ad extends BaseModel
             $stmt->execute();
 
 
-            // $stmt->bindValue(':label', $this->attributes['label'], PDO::PARAM_STR);
-            // $stmt->bindValue(':lang_origin',  1,  PDO::PARAM_INT);
-            // $stmt->bindValue(':lang_trans',  1,  PDO::PARAM_INT);
-            // $stmt->bindValue(':description',  $this->attributes['description'],  PDO::PARAM_STR);
-            // $stmt->bindValue(':img_file',  $this->attributes['img_file'],  PDO::PARAM_STR);
-            // $stmt->bindValue(':type_id',  1,  PDO::PARAM_INT);
-            // $stmt->bindValue(':luis_score', 1,  PDO::PARAM_INT);
-
-            // $stmt->execute();
-
         $query = "SET foreign_key_checks = 1;";
         self::$dbc->exec($query);
     }
@@ -140,6 +130,29 @@ EOD;
             FROM $f_table
             WHERE $f_col = '$f_col_val'
         );
+EOD;
+
+        $stmt = self::$dbc->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        if (isset($result)) {
+            return $result; 
+        }
+            return NULL;
+    }
+
+       public static function getById($select, $id)
+    {    
+       
+        self::dbConnect();
+        $table = static::$table_name;
+
+        $query = <<<EOD
+
+        SELECT $select 
+        FROM $table 
+        WHERE id = $id;
 EOD;
 
         $stmt = self::$dbc->query($query);
