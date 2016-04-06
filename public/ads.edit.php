@@ -47,18 +47,18 @@ require_once '../utils/auth.php';
 			</form>
 
 			<form>
-				<label for="description">Description</label>
+				<label for="description">Description:</label>
 	                <textarea id="description" name="Description" rows="5" cols="40" placeholder="Brief Description"></textarea>
 			</form>
 
 			<form action="img">
 				<p>Upload Your Bad Translation Picture:</p>
-			  	<input type="file" name="pic" accept="image/*">
+			  	<input type="file" name="pic" accept="audio/*, video/*, image/*">
 			  	<input type="submit">
 			</form>
 
 			<form>
-				<label for="type_id">Select Translation Type: </label>
+				<label for="type_id">Select Translation Type:</label>
 				<select id="type_id" name="type_id">
 				    <option value="1">Signs</option>
 				    <option value="2">Tattoos</option>
@@ -66,7 +66,7 @@ require_once '../utils/auth.php';
 			</form>
 
 			<form>
-				<label for="luis_score">Select Luis's level of disgust : </label>
+				<label for="luis_score">Select Luis's level of disgust:</label>
 				<select id="luis_score" name="luis_score">
 				    <option value="1">Meh</option>
 				    <option value="2">Facepalm</option>
