@@ -78,14 +78,12 @@ include_once "../bootstrap.php";
 					<td><a href="/ads.show.php?id=<?= $value['id']; ?> "><h3><?= $value['label']; ?></h3></a></td>
 					<td><img<?= ' src="img/Luis_Pic/' . Ad::getForKeyCol($id,'luis_score','luis','img_file') .'" ';?>style="width:50px;height:50px;"></td>
 					<td>
-						<button class="edit" name="id" value="<?= $value['id'] ?>">edit</button>
+						<form method="GET" action="ads.edit.php">
+							<button class="edit" name="id" value="<?= $value['id'] ?>">edit</button>
+						</form>
 						<button class="del" name="id" value="<?= $value['id'] ?>">delete</button>
 					</td>
 
-					<!-- <form method="GET">
-							<button class="edit" name="id" value="<?= $value['id'] ?>">edit</button>
-							<button class="del" name="id" value="<?= $value['id'] ?>">delete</button>
-					</form> -->
 
 				</tr>
 
@@ -98,34 +96,34 @@ include_once "../bootstrap.php";
 		<script type="text/javascript">
 
 			  "use strict";
-			  var edit = false;
+			  // var edit = false;
 			  var del = false;
 			  var id;
 			  
-			  $('.edit').on('click', function() {
+			  // $('.edit').on('click', function() {
 
-			  	id = $(this).val();
+			  // 	id = $(this).val();
 
-			  	console.log(id);
+			  // 	console.log(id);
 
-			  	edit = confirm("are you sure you want to leave the page to edit this entry?");
-			  	console.log(edit);
+			  // 	edit = confirm("are you sure you want to leave the page to edit this entry?");
+			  // 	console.log(edit);
 
-			  	if (edit) {
-			  		console.log('in it to win it');
-			  		$.ajax({
-					    url: "/js/ajax.php",
-					    type: "GET",
-					    data: {
-					        modify:  'del',
-					        id: id
-					    }
-					}).done(function(data){
-						console.log(data);
-					});
-			  	}
+			  // 	if (edit) {
+			  // 		console.log('in it to win it');
+			  // 		$.ajax({
+					//     url: "/js/ajax.php",
+					//     type: "GET",
+					//     data: {
+					//         modify:  'del',
+					//         id: id
+					//     }
+					// }).done(function(data){
+					// 	console.log(data);
+					// });
+			  // 	}
 
-			  });
+			  // });
 
 
 			  $('.del').on('click', function() {

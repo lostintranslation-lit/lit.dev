@@ -18,4 +18,5 @@ class Input
 		return $default;
 	}
 
+
 }
