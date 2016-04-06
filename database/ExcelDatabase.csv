@@ -1,8 +1,12 @@
 label,lang_origin,lang_trans,description,img_file,type_id,luis_score
-crab,4,1,fresh crap,1.jpeg,2,1
-soup,4,1,soup for sluts,2.jpeg,2,2
+crab,4,1,,1.jpeg,2,1
+soup,4,1,,2.jpeg,2,2
 fire extinguisher,4,1,hand grenade,3.jpeg,2,2
-road construction,3,1,road surprise,4.jpeg,2,1
+road construction,5,1,road surprise,4.jpeg,2,1
 awesomeness,1,1,not so awesome,5.jpeg,1,1
-Coors,2,1,suffer from diarrhea ,6.jpeg,2,2
-cray tatoo,3,1,Babylon dictionary,7.jpeg,1,1
+Coors,2,1,,6.jpeg,2,2
+cray tatoo,3,1,"""I love Bob"" NOW ""description of Bablyon dictionary""",7.jpeg,1,1
+meat eater,4,1,,8.jpeg,1,1
+freedom,3,1,"""I'm free"" NOW ""I'm for free""",9.jpeg,1,2
+election time,4,1,,10.jpeg,2,1
+dinner menu,4,1,"""look it up in wikipedia""",11.jpeg,2,1
