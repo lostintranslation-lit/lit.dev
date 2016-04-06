@@ -106,12 +106,10 @@ even if ".page_title" is within ".page_content"*/
 input[type=text] {  
 	border: 3px solid #B80000;
 	border-radius: 6px;
-	cursor:pointer;
 }
 
 input[type=text]:focus {
 	border: 4px solid #F80000;
-	background-color: #ffcccc;
 	outline: none;
 	box-shadow: 10px 10px 5px #888888;
 }
@@ -133,12 +131,10 @@ textarea {
 	border: 3px solid #B80000;
 	border-radius: 6px;
 	resize: none;
-	cursor: pointer;
 }
 
 textarea:focus {
 	border: 4px solid #F80000;
-	background-color: #ffcccc;
 	outline: none;
 	box-shadow: 10px 10px 5px #888888;
 }
@@ -154,7 +150,6 @@ input[type=submit] {
 
 input[type=submit]:focus {
 	border: 4px solid #F80000;
-	background-color: #ffcccc;
 	outline: none;
 	box-shadow: 10px 10px 5px #888888;
 }
@@ -170,7 +165,6 @@ input[type=file] {
 
 input[type=file]:focus {
 	border: 4px solid #F80000;
-	background-color: #ffcccc;
 	outline: none;
 	box-shadow: 10px 10px 5px #888888;
 }
