@@ -20,6 +20,8 @@ require_once '../utils/auth.php';
 
 	<body>
 
+		<?php include_once "../views/partials/navbar.php"; ?>
+		
 		<h1>Edit</h1>
 
 		<div class="questions">

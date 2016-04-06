@@ -13,7 +13,7 @@ abstract class BaseModel
 
     }
 
-	public function dbConnect() 
+	public static function dbConnect() 
     {
 		if (!self::$dbc) {   			
 			$dbc = new PDO('mysql:host=127.0.0.1;dbname=lit_db', 'lit_user', 'lit_user');
