@@ -1,9 +1,6 @@
 <?php 
 
-include_once "../bootstrap.php";
-require_once "../utils/Auth.php";
-require_once "../utils/Input.php";
-include_once "../views/partials/navbar.php";
+require_once "../bootstrap.php";
 
 ?>
 
@@ -22,7 +19,7 @@ include_once "../views/partials/navbar.php";
 	</head>
 
 	<body>
-
+		<?php include_once "../views/partials/navbar.php";?>
 		<h1>Edit Profile</h1>
 		  
 		<h3>Personal info:</h3>

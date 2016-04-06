@@ -26,7 +26,7 @@ CREATE TABLE lang (
 );
 
 TRUNCATE lang;
-INSERT INTO lang (lang) VALUES ('English'),('Spanish'),('Hebrew'),('Chinese Characters');
+INSERT INTO lang (lang) VALUES ('English'),('Spanish'),('Hebrew'),('Chinese Characters'),('Arabic');
 
 
 -- give each item a luis score

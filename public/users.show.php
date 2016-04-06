@@ -1,10 +1,5 @@
 <?php 
-
 include_once "../bootstrap.php";
-require_once "../utils/Auth.php";
-require_once "../utils/Input.php";
-include_once "../views/partials/navbar.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +17,7 @@ include_once "../views/partials/navbar.php";
 	</head>
 
 	<body>
-
+		<?php include_once "../views/partials/navbar.php";?>
 		<h1>User Profile</h1>
 
 		<div class='flexbox page_content'>
