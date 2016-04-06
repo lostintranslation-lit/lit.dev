@@ -13,6 +13,9 @@ include_once '../bootstrap.php';
 	</head>
 
 	<body>
+
+		<?php include_once "../views/partials/navbar.php"; ?>
+
 			<div class='flexbox page_title'>
 				<!-- just changed the title temporarily for fun -->
 				<h1>Luis's Loco Lingo!</h1>

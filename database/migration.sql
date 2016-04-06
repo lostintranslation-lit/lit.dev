@@ -78,4 +78,4 @@ CREATE TABLE user (
 );
 
 TRUNCATE user;
-INSERT INTO user (username) VALUES ('password');
+INSERT INTO user (username, password) VALUES ('username','password');
