@@ -41,7 +41,7 @@ CREATE TABLE luis (
 );
 
 TRUNCATE luis;
-INSERT INTO luis (score, img_file) VALUES ('good', '2.png'),('bad', '5.png');
+INSERT INTO luis (score, img_file) VALUES ('meh', '2.png'),('facepalm', '5.png');
 
 -- table of translation entries
 DROP TABLE IF EXISTS lit;
@@ -56,14 +56,15 @@ CREATE TABLE lit (
     img_file VARCHAR(50) DEFAULT 'NONE',
     type_id INT UNSIGNED DEFAULT NULL,
     luis_score INT UNSIGNED DEFAULT NULL,
+    user_edit INT UNSIGNED DEFAULT 1,
     PRIMARY KEY (id),
     FOREIGN KEY (type_id) REFERENCES type (id),
     FOREIGN KEY (lang_origin) REFERENCES lang (id),
     FOREIGN KEY (lang_trans) REFERENCES lang (id),
-    FOREIGN KEY (luis_score) REFERENCES luis (id)
+    FOREIGN KEY (luis_score) REFERENCES luis (id),
+    FOREIGN KEY (user_edit) REFERENCES user (id)
 );
 
-SET foreign_key_checks = 1;
 
 -- table of users and passwords
 
@@ -78,4 +79,6 @@ CREATE TABLE user (
 );
 
 TRUNCATE user;
-INSERT INTO user (username, password) VALUES ('username','password');
+INSERT INTO user (username, password) VALUES ('admin','admin');
+
+SET foreign_key_checks = 1;

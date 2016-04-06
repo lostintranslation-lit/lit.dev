@@ -4,8 +4,29 @@ class Ad extends BaseModel
 {
 
 	protected static $table_name = 'lit'; 
+    protected static $columns = ['label','lang_origin','lang_trans','description','img_file','type_id','luis_score'];
 
     /** Insert a new entry into the database */
+    public static function arrayColCheck($array)
+    {
+        $columns = static::$columns;
+        $boolCheck = [];
+
+        foreach ( $columns as $column) {
+            
+         
+            if (!array_key_exists($column, $array)) {   
+                array_push($boolCheck, 'the end is here');  
+            }
+
+        }
+            
+        return empty($boolCheck);
+
+
+
+    }
+
     protected function insert()
     {
     
@@ -17,25 +38,28 @@ class Ad extends BaseModel
     /** Update existing entry in the database */
     protected function update()
     {
-        $query = "SET foreign_key_checks = 0;";
-        self::$dbc->exec($query);
+        if (true) {
+            
+            $query = "SET foreign_key_checks = 0;";
+            self::$dbc->exec($query);
 
 
-        $stmt = self::$dbc->prepare('INSERT INTO lit (label, lang_origin, lang_trans, description, img_file, type_id, luis_score) VALUES (:label, :lang_origin, :lang_trans, :description, :img_file, :type_id, :luis_score)');
+            $stmt = self::$dbc->prepare('INSERT INTO lit (label, lang_origin, lang_trans, description, img_file, type_id, luis_score) VALUES (:label, :lang_origin, :lang_trans, :description, :img_file, :type_id, :luis_score)');
 
-            $stmt->bindValue(':label', $this->attributes['label'], PDO::PARAM_STR);
-            $stmt->bindValue(':lang_origin',  $this->attributes['lang_origin'],  PDO::PARAM_INT);
-            $stmt->bindValue(':lang_trans',  $this->attributes['lang_trans'],  PDO::PARAM_INT);
-            $stmt->bindValue(':description',  $this->attributes['description'],  PDO::PARAM_STR);
-            $stmt->bindValue(':img_file',  $this->attributes['img_file'],  PDO::PARAM_STR);
-            $stmt->bindValue(':type_id',  $this->attributes['type_id'],  PDO::PARAM_INT);
-            $stmt->bindValue(':luis_score',  $this->attributes['luis_score'],  PDO::PARAM_INT);
+                $stmt->bindValue(':label', $this->attributes['label'], PDO::PARAM_STR);
+                $stmt->bindValue(':lang_origin',  $this->attributes['lang_origin'],  PDO::PARAM_INT);
+                $stmt->bindValue(':lang_trans',  $this->attributes['lang_trans'],  PDO::PARAM_INT);
+                $stmt->bindValue(':description',  $this->attributes['description'],  PDO::PARAM_STR);
+                $stmt->bindValue(':img_file',  $this->attributes['img_file'],  PDO::PARAM_STR);
+                $stmt->bindValue(':type_id',  $this->attributes['type_id'],  PDO::PARAM_INT);
+                $stmt->bindValue(':luis_score',  $this->attributes['luis_score'],  PDO::PARAM_INT);
 
-            $stmt->execute();
+                $stmt->execute();
 
 
-        $query = "SET foreign_key_checks = 1;";
-        self::$dbc->exec($query);
+            $query = "SET foreign_key_checks = 1;";
+            self::$dbc->exec($query);
+        }
     }
 
 
@@ -73,12 +97,12 @@ class Ad extends BaseModel
      *
      * @return User[] Array of instances of the User class with attributes set to values from database
      */
-    public static function all()
+    public static function all($col = '*', $table_name)
     {
         
         self::dbConnect();
 
-        $stmt = self::$dbc->query('SELECT * FROM '. self::$table_name);
+        $stmt = self::$dbc->query('SELECT ' . $col . ' FROM '. $table_name);
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -142,12 +166,11 @@ EOD;
             return NULL;
     }
 
-       public static function getById($select, $id)
+       public static function getById($select, $id, $table = 'lit')
     {    
        
         self::dbConnect();
-        $table = static::$table_name;
-
+    
         $query = <<<EOD
 
         SELECT $select 
