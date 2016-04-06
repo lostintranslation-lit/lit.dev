@@ -47,7 +47,7 @@ function pageController()
         	<label>Username</label>
         	<input type="text" name="username" placeholder="Enter Username"><br>
         	<label>Password</label>
-        	<input type="password" name="password" placeholder="Enter Password"><br>
+        	<input type="text" name="password" placeholder="Enter Password"><br>
         	<input type="submit" name="submit">
     	</form>
 
