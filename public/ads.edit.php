@@ -73,31 +73,44 @@ $message = 'Edit';
 	}
 
 	if (Ad::arrayColCheck($_POST)) {
-		
+		 
+	   
+	   foreach ($_POST as $key => &$value) {
+            
+            $value = Input::escape($value);
+        }
+
 		var_dump("in it to win it");
 		$new_item = new Ad($_POST);
 		$new_item->save();
 		$message = "Item submitted - Sucess Ninja!";
+		var_dump($new_item);
 
 	}
 
-// // 
-// // file uploads
-// // 
-// 	$uploaddir = '/var/www/uploads/';
-// 	$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
+// 
+// file uploads
 
-// 	echo '<pre>';
-// 	if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-// 	    echo "File is valid, and was successfully uploaded.\n";
-// 	} else {
-// 	    echo "Possible file upload attack!\n";
-// 	}
+	var_dump($_FILES);
 
-// 	echo 'Here is some more debugging info:';
-// 	print_r($_FILES);
+	
+	$tid = Ad::getLastInId(); 
+	var_dump($tid);
 
-// 	print "</pre>";
+	// $uploaddir = 'img/ads.img';
+	// $uploadfile = $uploaddir . basename($_FILES['img_raw']['name']);
+
+	// echo '<pre>';
+	// if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
+	//     echo "File is valid, and was successfully uploaded.\n";
+	// } else {
+	//     echo "Possible file upload attack!\n";
+	// }
+
+	// echo 'Here is some more debugging info:';
+	// print_r($_FILES);
+
+	// print "</pre>";
 
 ?>
 
@@ -121,7 +134,7 @@ $message = 'Edit';
 		<div class="page_title"><h1><?= $message; ?></h1></div>
 
 		<div class="questions page_content">
-			<form id="page_form" method="POST">
+			<form id="page_form" method="POST" enctype="multipart/form-data">
 
 			
 	        	<input type="text" name="label" placeholder="Enter Label">
@@ -146,8 +159,8 @@ $message = 'Edit';
 	
 	            <textarea id="description" name="description" rows="5" cols="40" placeholder="Brief Description"></textarea>
 				
-				<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-				<input type="hidden" name="img_file" value="hah">
+					<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+					<input name="img_file" value="bbb">
 
 				<div id="image_update flexbox">
 					<span>Upload Your Bad Translation Image:</span>
