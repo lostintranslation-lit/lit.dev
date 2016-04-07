@@ -1,28 +1,36 @@
 <?php 
 
 include_once "../bootstrap.php";
-require_once "../utils/Auth.php";
-require_once "../utils/Input.php";
 
-function pageController()
-{
-	if(Input::has('username') && Input::has('password')) {
-		$username = Input::get('username');
-		$password = Input::get('password');
+$error = '';
+// function pageController()
+// {
+// 	if(Input::has('username') && Input::has('password')) {
+// 		$username = Input::get('username');
+// 		$password = Input::get('password');
+// 		$result = Auth::attempt($username, $password);
+// 		if($result) {
+// 			header("Location: authorized.php");
+// 			die();
+// 		}
+// 	}
+// 	$attemptedUsername = inputHas('username') ? inputGet('username') : '';
+// 	$attemptedPassword = inputHas('password') ? inputGet('password') : '';
+// }
 
+	if ($_POST && Input::get('username', '') != '' && Input::get('password', '') != '') {
+		$user = new User;
+		$user->username = Input::get('username');
+		$user->password = Input::get('password');
 		$result = Auth::attempt($username, $password);
-
-		if($result) {
-			header("Location: authorized.php");
+		if($result == true) {
+ 			
 			die();
+		
+		} else {
+			$error = "Hey! Your username and password don't match what's on file!";
 		}
 	}
-
-	$attemptedUsername = inputHas('username') ? inputGet('username') : '';
-
-	$attemptedPassword = inputHas('password') ? inputGet('password') : '';
-
-}
 
 ?>
 
@@ -45,17 +53,28 @@ function pageController()
 		<h1>Log In</h1>
 
 		<form method="POST">
-        	<label>Username</label>
-        	<input type="text" name="username" placeholder="Enter Username"><br>
-        	<label>Password</label>
-        	<input type="text" name="password" placeholder="Enter Password"><br>
-        	<input type="submit" name="submit">
+        	<p>
+	        	<label for="username">Username:</label>
+	        	<input type="text" name="username" id="username" placeholder="Enter Username">
+	        </p>
+	        <p>
+        		<label for="password">Password:</label>
+        		<input type="password" name="password" placeholder="Enter Password">
+        	</p>
+        	<p>
+        		<button id="myBtn" type="submit" name="submit"></button>
+        	</p>
     	</form>
+
+			
+    	 <div class='flexbox page_content'>
+
     	<h3>Or</h3>
 
     	<a href="/users.create.php" target="_blank">New Users Click Here</a>
 
-    	<div class='flexbox page_content'>
+    	</div>
+
 			<img src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/>
 		<layer id="placeholderlayer"></layer><div id="placeholderdiv"></div>
 

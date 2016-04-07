@@ -1,7 +1,7 @@
 <?php 
 
 session_start();
-require_once "../utils/Auth.php";
+include_once "../bootstrap.php";
 
 var_dump($_SESSION);
 
@@ -22,6 +22,9 @@ die();
 	</head>
 
 	<body>
+		<div class='flexbox page_content'>
+			<img src="/img/ads.img/panda.jpeg" alt="panda" style="width:400px;height:400px;"/>
+			<p align="center">этот класс является сумасшедшим</p> 
 	</body>
 
 </html>
