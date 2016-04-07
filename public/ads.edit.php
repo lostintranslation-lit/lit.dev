@@ -2,6 +2,13 @@
 
 require_once "../bootstrap.php";
 $message = 'Edit';
+$id_label = '';
+$selected_lang_origin = 0;
+$selected_lang_trans = 0;
+$id_description = '';
+$id_img_file = 0;
+$selected_type_id = 0;
+$selected_luis_score = 0;
 
 // stuff when the page loads... (for editing)
 	function arrDimDown($arr_2D){
@@ -23,12 +30,11 @@ $message = 'Edit';
 		return $arr_2D;
 	}
 
-	function isSelected($option,$selected_id,$col,$table) {
+	function isSelected($current_option, $selected_option) {
 
-		$current_option = Ad::getById($col, $selected_id, $table);
 		$selection = '';
 		
-		if ($current_option == $option) {
+		if ($current_option == $selected_option) {
 			
 			$selection = "selected";
 		}
@@ -57,9 +63,6 @@ $message = 'Edit';
 
 // POST items
 
-	
-
-	var_dump(Ad::arrayColCheck($_POST));
 
 	if (Input::has('id')) {
 
@@ -67,50 +70,73 @@ $message = 'Edit';
 		
 		$id_item = Ad::getById('*', $id);
 		var_dump($id_item);
-		
+
+		$id_label = $id_item[0]['label'];
+		$selected_lang_origin = $id_item[0]['lang_origin'];
+		$selected_lang_trans = $id_item[0]['lang_trans'];
+		$id_description = $id_item[0]['description'];
+		$id_img_file = $id_item[0]['img_file'];
+		$selected_type_id = $id_item[0]['type_id'];
+		$selected_luis_score = $id_item[0]['luis_score'];
 
 
 	}
 
 	if (Ad::arrayColCheck($_POST)) {
-		 
-	   
-	   foreach ($_POST as $key => &$value) {
+
+	    foreach ($_POST as $key => &$value) {
             
             $value = Input::escape($value);
         }
 
-		var_dump("in it to win it");
 		$new_item = new Ad($_POST);
-		$new_item->save();
-		$message = "Item submitted - Sucess Ninja!";
-		var_dump($new_item);
 
+		
+
+
+		// file uploads
+		var_dump($_FILES);
+		if ($_FILES['img_raw']['error'] != 4) {
+			
+			$uploaddir = 'img/ads.img/';
+
+			$_FILES['img_raw']['name'] = uniqid();
+
+			$extension = explode('/', $_FILES['img_raw']['type'])[1];
+			$file_name = basename($_FILES['img_raw']['name']) . '.' . $extension;
+			$uploadfile = $uploaddir . $file_name;
+			$new_item->img_file = $file_name;
+
+			if (!move_uploaded_file($_FILES['img_raw']['tmp_name'], $uploadfile)) {
+
+			    $message = "file failed to upload";
+			} 	 	
+		}
+
+		
+		// insert into db  
+		if ($message != "file failed to upload" && $new_item->img_file != 0) {
+			
+			if (isset($id)) {
+				
+				$new_item->save($id);
+
+			} else {
+
+				$new_item->save();
+				
+			}
+			
+			$message = "Item submitted - Sucess Ninja!";
+		} else {
+
+			$message = $message . " page - lame! it's not working, go cry";
+		}
+		
 	}
 
-// 
-// file uploads
 
-	var_dump($_FILES);
-
-	
-	$tid = Ad::getLastInId(); 
-	var_dump($tid);
-
-	// $uploaddir = 'img/ads.img';
-	// $uploadfile = $uploaddir . basename($_FILES['img_raw']['name']);
-
-	// echo '<pre>';
-	// if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-	//     echo "File is valid, and was successfully uploaded.\n";
-	// } else {
-	//     echo "Possible file upload attack!\n";
-	// }
-
-	// echo 'Here is some more debugging info:';
-	// print_r($_FILES);
-
-	// print "</pre>";
+var_dump($id_description);
 
 ?>
 
@@ -137,50 +163,53 @@ $message = 'Edit';
 			<form id="page_form" method="POST" enctype="multipart/form-data">
 
 			
-	        	<input type="text" name="label" placeholder="Enter Label">
+	        	<input type="text" name="label" placeholder="Enter Label" value="<?= $id_label; ?>">
 			
 
 				<select id="lang_origin" name="lang_origin">
-				  	<option selected disabled>select language of origin</option>
+				  	<option <?= isSelected(0, $selected_lang_origin); ?> disabled>select language of origin</option>
 				  	<?php foreach($lang_opts as $id => $lang): ?>
-				   		<option value="<?= ++$id ?>"><?= $lang ?></option>
+				   		<option value="<?= ++$id ?>" <?= isSelected($id, $selected_lang_origin); ?>><?= $lang ?></option>
 				  	<?php endforeach; ?>  
 				</select>
 			
 
 
 				<select id="lang_trans" name="lang_trans">
-					<option selected disabled>select translated language</option>
+					<option <?= isSelected(0, $selected_lang_trans); ?> disabled>select translated language</option>
 				    <?php foreach($lang_opts as $id => $lang): ?>
-				   		<option value="<?= ++$id ?>"><?= $lang ?></option>
+				   		<option value="<?= ++$id ?>" <?= isSelected($id, $selected_lang_trans); ?>><?= $lang ?></option>
 				   	<?php endforeach; ?>
 				</select>
 			
 	
-	            <textarea id="description" name="description" rows="5" cols="40" placeholder="Brief Description"></textarea>
+	            <textarea id="description" name="description" rows="5" cols="40" placeholder="Brief Description"><?= $id_description; ?></textarea>
 				
-					<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-					<input name="img_file" value="bbb">
+					<!-- <input name="img_file" value="bbb"> -->
 
-				<div id="image_update flexbox">
-					<span>Upload Your Bad Translation Image:</span>
-				  	<input type="file" name="img_raw" accept="audio/*, video/*, image/*">
-				</div>
+			
+					<div id="image_update flexbox">
+						<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
+						<input type="hidden" name="img_file" value="<?= $id_img_file ?>" />
+						<span>Upload Your Bad Translation Image:</span>
+					  	<input type="file" name="img_raw" accept="audio/*, video/*, image/*">
+					</div>
+				
 					
 
 			
 				<select id="type_id" name="type_id">
-					<option selected disabled>select translation type</option>
+					<option <?= isSelected(0, $selected_type_id); ?> disabled>select translation type</option>
 			    	<?php foreach($type as $id => $value): ?>
-			   			<option value="<?= ++$id ?>"><?= $value ?></option>
+			   			<option value="<?= ++$id ?>" <?= isSelected($id, $selected_type_id); ?>><?= $value ?></option>
 			  		<?php endforeach; ?>
 				</select>
 			
 				<select id="luis_score" name="luis_score">
-					<option selected disabled>select luis's level of disgust</option>
+					<option <?= isSelected(0, $selected_luis_score); ?> disabled>select luis's level of disgust</option>
 				   	<?php $id=0; ?>
 				   	<?php foreach($luis_score as $img => $luis): ?>
-				   		<option value="<?= ++$id ?>" data-img="<?= $img ?>"><?= $luis ?></option>
+				   		<option value="<?= ++$id ?>" <?= isSelected($id, $selected_luis_score); ?> data-img="<?= $img ?>"><?= $luis ?></option>
 				  	<?php endforeach; ?>
 				</select>
 
@@ -189,8 +218,6 @@ $message = 'Edit';
 
 			</form>	
 		</div>
-
-		<div id="test" data-suck="pleasework"></div>
 
 		<div class='flexbox page_content'>
 			<img id="luis_img" src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/>

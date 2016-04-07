@@ -35,42 +35,40 @@ class Ad extends BaseModel
 
     protected function insert()
     {
-    
-        self::update();
+        
+        $stmt = self::$dbc->prepare('INSERT INTO lit (label, lang_origin, lang_trans, description, img_file, type_id, luis_score) VALUES (:label, :lang_origin, :lang_trans, :description, :img_file, :type_id, :luis_score)');
+
+            $stmt->bindValue(':label', $this->attributes['label'], PDO::PARAM_STR);
+            $stmt->bindValue(':lang_origin',  $this->attributes['lang_origin'],  PDO::PARAM_INT);
+            $stmt->bindValue(':lang_trans',  $this->attributes['lang_trans'],  PDO::PARAM_INT);
+            $stmt->bindValue(':description',  $this->attributes['description'],  PDO::PARAM_STR);
+            $stmt->bindValue(':img_file',  $this->attributes['img_file'],  PDO::PARAM_STR);
+            $stmt->bindValue(':type_id',  $this->attributes['type_id'],  PDO::PARAM_INT);
+            $stmt->bindValue(':luis_score',  $this->attributes['luis_score'],  PDO::PARAM_INT);
+
+        $stmt->execute();
+
         $this->attributes['id'] = self::$dbc->lastInsertId();
 
     }
 
     /** Update existing entry in the database */
-    protected function update()
+    protected function update($id)
     {
-        if (true) {
+       
 
-            foreach ($this->attributes as $key => &$value) {
-                
-                $value = Input::escape($value);
-            }
-            
-            $query = "SET foreign_key_checks = 0;";
-            self::$dbc->exec($query);
+        $stmt = self::$dbc->prepare("UPDATE lit SET label = :label, lang_origin = :lang_origin, lang_trans = :lang_trans, description = :description, img_file = :img_file, type_id = :type_id, luis_score = :luis_score WHERE id = $id");
 
+            $stmt->bindValue(':label', $this->attributes['label'], PDO::PARAM_STR);
+            $stmt->bindValue(':lang_origin',  $this->attributes['lang_origin'],  PDO::PARAM_INT);
+            $stmt->bindValue(':lang_trans',  $this->attributes['lang_trans'],  PDO::PARAM_INT);
+            $stmt->bindValue(':description',  $this->attributes['description'],  PDO::PARAM_STR);
+            $stmt->bindValue(':img_file',  $this->attributes['img_file'],  PDO::PARAM_STR);
+            $stmt->bindValue(':type_id',  $this->attributes['type_id'],  PDO::PARAM_INT);
+            $stmt->bindValue(':luis_score',  $this->attributes['luis_score'],  PDO::PARAM_INT);
 
-            $stmt = self::$dbc->prepare('INSERT INTO lit (label, lang_origin, lang_trans, description, img_file, type_id, luis_score) VALUES (:label, :lang_origin, :lang_trans, :description, :img_file, :type_id, :luis_score)');
-
-                $stmt->bindValue(':label', $this->attributes['label'], PDO::PARAM_STR);
-                $stmt->bindValue(':lang_origin',  $this->attributes['lang_origin'],  PDO::PARAM_INT);
-                $stmt->bindValue(':lang_trans',  $this->attributes['lang_trans'],  PDO::PARAM_INT);
-                $stmt->bindValue(':description',  $this->attributes['description'],  PDO::PARAM_STR);
-                $stmt->bindValue(':img_file',  $this->attributes['img_file'],  PDO::PARAM_STR);
-                $stmt->bindValue(':type_id',  $this->attributes['type_id'],  PDO::PARAM_INT);
-                $stmt->bindValue(':luis_score',  $this->attributes['luis_score'],  PDO::PARAM_INT);
-
-                $stmt->execute();
-
-
-            $query = "SET foreign_key_checks = 1;";
-            self::$dbc->exec($query);
-        }
+        $stmt->execute();
+         
     }
 
 
