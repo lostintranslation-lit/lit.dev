@@ -35,13 +35,18 @@ abstract class BaseModel
         $this->attributes[$name] = $value;
     }
 
-    public function save()
+    public function save($id=Null)
     {    
         if(!empty($this->attributes)) {  
-        if (array_key_exists('id', $this->attributes)) {   
-        $this->update();
+
+            if (!empty($id)) {   
+               
+                $this->update($id);
+
             } else {
+
                  $this->insert();
+
             }
         }
     }
