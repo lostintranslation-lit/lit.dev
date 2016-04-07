@@ -1,9 +1,14 @@
 USE lit_db;
 
-SET foreign_key_checks = 0;
 
 -- table of types of translations, foreign key on lit
+DROP TABLE IF EXISTS lit;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS img_file;
+DROP TABLE IF EXISTS luis;
+DROP TABLE IF EXISTS lang;
 DROP TABLE IF EXISTS typet;
+
 
 CREATE TABLE typet (
 
@@ -15,9 +20,9 @@ CREATE TABLE typet (
 TRUNCATE typet;
 INSERT INTO typet (typet) VALUES ('tattoo'),('sign');
 
--- table of languages, foreign key on lit used twice
-DROP TABLE IF EXISTS lang;
 
+
+-- table of languages, foreign key on lit used twice
 CREATE TABLE lang (
 
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -30,8 +35,6 @@ INSERT INTO lang (lang) VALUES ('English'),('Spanish'),('Hebrew'),('Chinese Char
 
 
 -- give each item a luis score
-DROP TABLE IF EXISTS luis;
-
 CREATE TABLE luis (
 
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -41,35 +44,10 @@ CREATE TABLE luis (
 );
 
 TRUNCATE luis;
-INSERT INTO luis (score, img_file) VALUES ('meh', '2.png'),('facepalm', '5.png');
-
--- table of translation entries
-DROP TABLE IF EXISTS lit;
-
-CREATE TABLE lit (
-
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    label VARCHAR(100) NOT NULL, 
-    lang_origin INT UNSIGNED DEFAULT NULL, 
-    lang_trans INT UNSIGNED DEFAULT NULL,
-    description  VARCHAR(1000) NOT NULL,
-    img_file VARCHAR(50) DEFAULT 'NONE',
-    type_id INT UNSIGNED DEFAULT NULL,
-    luis_score INT UNSIGNED DEFAULT NULL,
-    user_edit INT UNSIGNED DEFAULT 1,
-    PRIMARY KEY (id),
-    FOREIGN KEY (type_id) REFERENCES type (id),
-    FOREIGN KEY (lang_origin) REFERENCES lang (id),
-    FOREIGN KEY (lang_trans) REFERENCES lang (id),
-    FOREIGN KEY (luis_score) REFERENCES luis (id),
-    FOREIGN KEY (user_edit) REFERENCES user (id)
-);
+INSERT INTO luis (score, img_file) VALUES ('meh', '2.png'),('facepalm', '5.p ng');
 
 
 -- table of users and passwords
-
-DROP TABLE IF EXISTS user;
-
 CREATE TABLE user (
 
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -81,4 +59,26 @@ CREATE TABLE user (
 TRUNCATE user;
 INSERT INTO user (username, password) VALUES ('admin','admin');
 
-SET foreign_key_checks = 1;
+
+
+-- table of translation entries
+CREATE TABLE lit (
+
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    label VARCHAR(100) NOT NULL, 
+    lang_origin INT UNSIGNED DEFAULT NULL, 
+    lang_trans INT UNSIGNED DEFAULT NULL,
+    description  VARCHAR(1000) NOT NULL,
+    img_file VARCHAR(100) NULL,
+    type_id INT UNSIGNED DEFAULT NULL,
+    luis_score INT UNSIGNED DEFAULT NULL,
+    user_edit INT UNSIGNED DEFAULT 1,
+    PRIMARY KEY (id),
+    CONSTRAINT img_file UNIQUE (img_file),
+    FOREIGN KEY (type_id) REFERENCES typet (id),
+    FOREIGN KEY (lang_origin) REFERENCES lang (id),
+    FOREIGN KEY (lang_trans) REFERENCES lang (id),
+    FOREIGN KEY (luis_score) REFERENCES luis (id),
+    FOREIGN KEY (user_edit) REFERENCES user (id)
+);
+
