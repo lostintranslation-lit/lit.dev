@@ -65,8 +65,16 @@ $error = '';
         		<button id="myBtn" type="submit" name="submit"></button>
         	</p>
     	</form>
+
 			
     	 <div class='flexbox page_content'>
+
+    	<h3>Or</h3>
+
+    	<a href="/users.create.php" target="_blank">New Users Click Here</a>
+
+    	</div>
+
 			<img src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/>
 		<layer id="placeholderlayer"></layer><div id="placeholderdiv"></div>
 
