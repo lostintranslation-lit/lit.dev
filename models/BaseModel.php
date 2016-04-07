@@ -46,6 +46,18 @@ abstract class BaseModel
         }
     }
 
+// adding function to find data already in database:
+    public function find()
+    {    
+        if(!empty($this->attributes)) {  
+        if (array_key_exists('id', $this->attributes)) {   
+        $this->update();
+            } else {
+                 $this->insert();
+            }
+        }
+    }
+    
     public static function truncate($table_name)
     {
         self::dbConnect();
