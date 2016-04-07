@@ -51,6 +51,9 @@ function pageController()
         	<input type="text" name="password" placeholder="Enter Password"><br>
         	<input type="submit" name="submit">
     	</form>
+    	<h3>Or</h3>
+
+    	<a href="/users.create.php" target="_blank">New Users Click Here</a>
 
     	<div class='flexbox page_content'>
 			<img src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/>
