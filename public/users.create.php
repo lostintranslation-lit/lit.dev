@@ -32,11 +32,11 @@ if ($_POST && Input::get('username', '') != '' && Input::get('password', '') != 
 	    		<p>Please create an account below:</p>
 	    		<p>
 			        <label for="username">Username:</label>
-			        <input id="username" name="username" type="text">
+			        <input id="username" name="username" type="text" placeholder="Enter a username">
 			    </p>    
 			    <p>
 			        <label for="password">Password:</label>
-			        <input id="password" name="password" type="password">
+			        <input id="password" name="password" type="password" placeholder="Enter a password">
 			    </p>
 			    <p>
 			        <button id="myBtn" type="submit" name="message" value="GRACIAS!">Submit</button>

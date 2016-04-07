@@ -16,11 +16,12 @@ include_once '../bootstrap.php';
 
 		<?php include_once "../views/partials/navbar.php"; ?>
 
-			<div class='flexbox page_title'>
-				<!-- just changed the title temporarily for fun -->
-				<h1>Luis's Loco Lingo!</h1>
+			<!-- <div class='flexbox page_title'> -->
+			<h2><p align='center'>Ever felt a little "Lost in Translation"???<br> 
+			Join our followers and check out</h2>	
+				<h1 align='center'>Luis's Loco Lingo!</h1></p>
 			</div>
-		<!-- <span class="random_image"></span> this did not quite work-->
+		
 		<div class='flexbox page_content'>
 
 	<script>
@@ -35,8 +36,9 @@ include_once '../bootstrap.php';
 			randomimages[n] = "/img/Luis_Pic/" + (n+1) + ".png";
 		}
 
-		document.write('<img name="defaultimage" src="'+randomimages[Math.floor(Math.random()*(randomimages.length))]+'" style="width:400px;height:400px;">');
-		//this did not work: $('.random_image').append('<img name="defaultimage" src="'+randomimages[Math.floor(Math.random()*(randomimages.length))]+'" style="width:400px;height:400px;">')
+		document.write('<img name="defaultimage" src="'+randomimages[Math.floor(Math.random()*(randomimages.length))]
+			+'" style="width:400px;height:400px;">');
+		
 				
 		function rotateimage()
 		{
