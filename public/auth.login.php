@@ -24,9 +24,8 @@ $error = '';
 		$user->password = Input::get('password');
 		$result = Auth::attempt($username, $password);
 		if($result == true) {
- 			
-			die();
-		
+ 			index.php;
+			die();		
 		} else {
 			$error = "Hey! Your username and password don't match what's on file!";
 		}
@@ -55,27 +54,29 @@ $error = '';
 		<form method="POST">
         	<p>
 	        	<label for="username">Username:</label>
-	        	<input type="text" name="username" id="username" placeholder="Enter Username">
+	        	<input type="text" id="username" name="username" placeholder="Enter your username">
 	        </p>
 	        <p>
         		<label for="password">Password:</label>
-        		<input type="password" name="password" placeholder="Enter Password">
+        		<input type="password" id="password" name="password" placeholder="Enter your password">
         	</p>
         	<p>
-        		<button id="myBtn" type="submit" name="submit"></button>
-        	</p>
+        		<input type="submit">
+    		</p>
+
+        	<h4>or</h4>
+
+    		<a href="/users.create.php" target="_blank">New Users Click Here</a>
+
     	</form>
 
 			
-    	 <div class='flexbox page_content'>
+    	 <!-- <div class='flexbox page_content'> -->
 
-    	<h3>Or</h3>
+    	
+    	<!-- </div> -->
 
-    	<a href="/users.create.php" target="_blank">New Users Click Here</a>
-
-    	</div>
-
-			<img src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/>
+			<p align='center'><img src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/></p>
 		<layer id="placeholderlayer"></layer><div id="placeholderdiv"></div>
 
 
