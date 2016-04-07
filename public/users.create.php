@@ -1,6 +1,7 @@
 <?php 
 
 include_once "../bootstrap.php";
+include_once "../views/partials/navbar.php";
 
 $message = Input::get('message');
 
