@@ -39,7 +39,6 @@
 		padding:0;
 		padding-top: 0.4em;
 		margin:0; 
-
 	}
 
 	/*establish styling for "a" element*/
@@ -51,18 +50,22 @@
 		display: block;
 		padding: .5em;
 		border: solid #cc0000 2px;
+		border-radius: 6px;
 	}
 
 
 	/*create styling for special li class*/
 	li.changeBackground {
 		background-color: #B80000;
+		border-radius: 6px;
 	}
 	li.changeBackground:hover {
 		background-color: #F80000;
+		border-radius: 6px;
 	}
 	li.changeBackground:active {
 		background-color: #880000;
+		border-radius: 6px;
 	}
     	
 
@@ -109,7 +112,7 @@ input[type=text] {
 }
 
 input[type=text]:focus {
-	border: 4px solid #F80000;
+	border: 3px solid #F80000;
 	outline: none;
 	box-shadow: 10px 10px 5px #888888;
 }
@@ -121,7 +124,7 @@ select {
 }
 
 select:focus {
-	border: 4px solid #F80000;
+	border: 3px solid #F80000;
 	background-color: #ffcccc;
 	outline: none;
 	box-shadow: 10px 10px 5px #888888;
@@ -134,7 +137,7 @@ textarea {
 }
 
 textarea:focus {
-	border: 4px solid #F80000;
+	border: 3px solid #F80000;
 	outline: none;
 	box-shadow: 10px 10px 5px #888888;
 }
@@ -149,7 +152,7 @@ input[type=submit] {
 }
 
 input[type=submit]:focus {
-	border: 4px solid #F80000;
+	border: 3px solid #F80000;
 	outline: none;
 	box-shadow: 10px 10px 5px #888888;
 }
@@ -164,7 +167,7 @@ input[type=file] {
 }
 
 input[type=file]:focus {
-	border: 4px solid #F80000;
+	border: 3px solid #F80000;
 	outline: none;
 	box-shadow: 10px 10px 5px #888888;
 }
