@@ -27,6 +27,12 @@ class Ad extends BaseModel
 
     }
 
+    public static function getLastInId() 
+    {
+        self::dbConnect();
+        return self::$dbc->lastInsertId();
+    }
+
     protected function insert()
     {
     
@@ -39,6 +45,11 @@ class Ad extends BaseModel
     protected function update()
     {
         if (true) {
+
+            foreach ($this->attributes as $key => &$value) {
+                
+                $value = Input::escape($value);
+            }
             
             $query = "SET foreign_key_checks = 0;";
             self::$dbc->exec($query);
@@ -187,6 +198,7 @@ EOD;
         }
             return NULL;
     }
+
 
 
 

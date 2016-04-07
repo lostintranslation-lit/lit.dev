@@ -18,5 +18,12 @@ class Input
 		return $default;
 	}
 
+	public static function escape($value)
+    {
+        
+        $outString = htmlspecialchars(strip_tags($value));
+        return $outString;
+    }
+
 
 }
