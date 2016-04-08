@@ -2,12 +2,17 @@
 session_start();
 
 require_once "../bootstrap.php";
+<<<<<<< HEAD
+=======
+// var_dump($_SESSION);
+>>>>>>> f41ca1c5d9b68dfdadca71128e543781e62dc014
 
 $msg = 'Login Form';
 if (array_key_exists('LOGGED_IN_USER', $_SESSION)) {
 	$msg = 'crazy - you are already logged in :)';
 }
 
+<<<<<<< HEAD
 if ($_POST && Input::get('username', '') != '' && Input::get('password', '') != '') {
 	$user = new User;
 	$user->username = Input::get('username');
@@ -15,6 +20,24 @@ if ($_POST && Input::get('username', '') != '' && Input::get('password', '') != 
 
 	$user_id = $user->find();
 	if (!is_null($user_id)) {
+=======
+	if ($_POST && Input::get('username', '') != '' && Input::get('password', '') != '') {
+		$user = new User;
+		$user->username = Input::get('username');
+		$user->password = Input::get('password');
+
+		$user_id = $user->find();
+		if (!is_null($user_id)) {
+
+			$user_id = $user_id['id'];
+			if (Auth::attempt('guest', 'password')) {
+
+				$arr = Ad::getFromForKey('id', 'user_edit', 'user', 'id', $user_id);
+				
+				if (!empty($arr)) {
+					
+					$arr = arrDimDown($arr);
+>>>>>>> f41ca1c5d9b68dfdadca71128e543781e62dc014
 
 		$user_id = $user_id['id'];
 		if (Auth::attempt('guest', 'password')) {
@@ -54,32 +77,34 @@ if ($_POST && Input::get('username', '') != '' && Input::get('password', '') != 
 
 	<body>
 		<?php include_once '../views/partials/navbar.php'; ?>
-		<h1><?= $msg; ?></h1>
+		<div class="page_title"><h1><?= $msg; ?></h1></div>
 
-		<form method="POST">
-        	
-	        	<p><label for="username">Username:</label>
-	        	<input type="text" id="username" name="username" placeholder="Enter your username"></p>
-	        	       
-        		 <p><label for="password">Password:</label>
-        		<input type="text" id="password" name="password" placeholder="Enter your password"></p>  	
-        	
-        		<p><input type="submit"></p>  		
+		<div class="questions page_content">
+			<form method="POST">
+	        	
+		        	<p><label for="username">Username:</label>
+		        	<input type="text" id="username" name="username" placeholder="Enter your username"></p>
+		        	       
+	        		 <p><label for="password">Password:</label>
+	        		<input type="text" id="password" name="password" placeholder="Enter your password"></p>  	
+	        	
+	        		<p><input type="submit"></p>  		
 
-        	<h4>or</h4>
+	        	<h4>or</h4>
 
-    		<a href="/users.create.php" target="_blank">New Users Click Here</a>
+	    		<a href="/users.create.php" target="_blank">New Users Click Here</a>
 
-    	</form>
+	    	</form>
 
-			
-    	 <!-- <div class='flexbox page_content'> -->
+				
+	    	 <!-- <div class='flexbox page_content'> -->
 
-    	
-    	<!-- </div> -->
+	    	
+	    	<!-- </div> -->
 
-			<p align='center'><img src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/></p>
-		<layer id="placeholderlayer"></layer><div id="placeholderdiv"></div>
+				<p align='center'><img src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/></p>
+			<layer id="placeholderlayer"></layer><div id="placeholderdiv"></div>
+		</div>
 
 	</body>
 
