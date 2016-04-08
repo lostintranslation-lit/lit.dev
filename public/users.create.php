@@ -26,22 +26,23 @@ if ($_POST && Input::get('username', '') != '' && Input::get('password', '') != 
 	<body>
 		<h1>New User Signup</h1>
 		<p>Welcome to Loco Luis Lingo! We're glad you could join us. Please take a moment to join our 
-			growing community of "loco language lovers"!</> 
+			growing community of "loco language lovers"!</p> 
 		<div>
 			<form method="POST">
 	    		<p>Please create an account below:</p>
-	    		<p>
-			        <label for="username">Username:</label>
-			        <input id="username" name="username" type="text" placeholder="Enter a username">
-			    </p>    
-			    <p>
-			        <label for="password">Password:</label>
-			        <input id="password" name="password" type="password" placeholder="Enter a password">
-			    </p>
-			    <p>
-			        <button id="myBtn" type="submit" name="message" value="GRACIAS!">Submit</button>
-			    </p>
+	    		
+			        <p><label for="username">Username:</label>
+			        <input id="username" name="username" type="text" placeholder="Enter a username"></p>
+			       
+			   
+			         <p><label for="password">Password:</label>
+			        <input id="password" name="password" type="text" placeholder="Enter a password"></p>
+			    
+			    
+			        <p><button id="myBtn" type="submit" name="message" value="GRACIAS!">Submit</button></p>
+			    
 			    <p><h3><?php echo $error ?></h3></p>
+			    
 			</form>
 		</div>						
 			<h2 align="center">Loco Leader Luis<br> says:</h2>

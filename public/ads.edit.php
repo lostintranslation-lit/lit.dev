@@ -136,57 +136,51 @@ var_dump($id_description);
 		<div class="questions page_content">
 			<form id="page_form" method="POST" enctype="multipart/form-data">
 
-			
 	        	<input type="text" name="label" placeholder="Enter Label" value="<?= $id_label; ?>">
-			
-
-				<select id="lang_origin" name="lang_origin">
+	        	
+				<p><select id="lang_origin" name="lang_origin">
 				  	<option <?= isSelected(0, $selected_lang_origin); ?> disabled>select language of origin</option>
 				  	<?php foreach($lang_opts as $id => $lang): ?>
 				   		<option value="<?= ++$id ?>" <?= isSelected($id, $selected_lang_origin); ?>><?= $lang ?></option>
 				  	<?php endforeach; ?>  
-				</select>
-			
-
-
-				<select id="lang_trans" name="lang_trans">
+				</select></p>
+				
+				<p><select id="lang_trans" name="lang_trans">
 					<option <?= isSelected(0, $selected_lang_trans); ?> disabled>select translated language</option>
 				    <?php foreach($lang_opts as $id => $lang): ?>
 				   		<option value="<?= ++$id ?>" <?= isSelected($id, $selected_lang_trans); ?>><?= $lang ?></option>
 				   	<?php endforeach; ?>
-				</select>
-			
-	
-	            <textarea id="description" name="description" rows="5" cols="40" placeholder="Brief Description"><?= $id_description; ?></textarea>
+				</select></p>
 				
 					<!-- <input name="img_file" value="bbb"> -->
-
 			
 					<div id="image_update flexbox">
 						<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
 						<input type="hidden" name="img_file" value="<?= $id_img_file ?>" />
-						<span>Upload Your Bad Translation Image:</span>
+						<span>Upload Your Bad Translation Image:</span><br>
 					  	<input type="file" name="img_raw" accept="audio/*, video/*, image/*">
 					</div>
 				
-					
 
-			
-				<select id="type_id" name="type_id">
+					<p><textarea id="description" name="description" rows="5" cols="40" placeholder="Brief Description"><?= $id_description; ?></textarea></p>
+				
+				<p><select id="type_id" name="type_id">
 					<option <?= isSelected(0, $selected_type_id); ?> disabled>select translation type</option>
 			    	<?php foreach($type as $id => $value): ?>
 			   			<option value="<?= ++$id ?>" <?= isSelected($id, $selected_type_id); ?>><?= $value ?></option>
 			  		<?php endforeach; ?>
-				</select>
-			
-				<select id="luis_score" name="luis_score">
+				</select></p>
+				
+
+				
+				<p><select id="luis_score" name="luis_score">
 					<option <?= isSelected(0, $selected_luis_score); ?> disabled>select luis's level of disgust</option>
 				   	<?php $id=0; ?>
 				   	<?php foreach($luis_score as $img => $luis): ?>
 				   		<option value="<?= ++$id ?>" <?= isSelected($id, $selected_luis_score); ?> data-img="<?= $img ?>"><?= $luis ?></option>
 				  	<?php endforeach; ?>
-				</select>
-
+				</select></p>
+				
 				<button type="submit" value="submit">submit</button>
 				<button id="reset" type="reset" value="reset">reset</button>
 
@@ -197,14 +191,10 @@ var_dump($id_description);
 			<img id="luis_img" src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/>
 		<layer id="placeholderlayer"></layer><div id="placeholderdiv"></div>
 
-
-
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript">
 		"use strict";
-		(function() {
-
-		
+		(function() {		
 
 			$('#luis_score').on('change', function(){
 
@@ -214,7 +204,6 @@ var_dump($id_description);
 				console.log(pic_file);
 
 				$('#luis_img').attr('src', '/img/Luis_Pic/' + pic_file);
-
 
 			})
 
