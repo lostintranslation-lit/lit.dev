@@ -13,6 +13,11 @@ class Auth
 			return false;
 		}
 	}
+	public static function setAds($ad_list)
+	{
+		$_SESSION['ad_list'] = $ad_list;
+	}
+
 	public static function check()
 	{
 		return (isset($_SESSION['LOGGED_IN_USER']));
