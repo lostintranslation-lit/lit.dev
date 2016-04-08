@@ -2,27 +2,12 @@
 session_start();
 
 require_once "../bootstrap.php";
-var_dump($_SESSION);
+// var_dump($_SESSION);
 
 $msg = 'Login Form';
 if (array_key_exists('LOGGED_IN_USER', $_SESSION)) {
 	$msg = 'crazy - you are already logged in :)';
 }
-
-// function pageController()
-// {
-// 	if(Input::has('username') && Input::has('password')) {
-// 		$username = Input::get('username');
-// 		$password = Input::get('password');
-// 		$result = Auth::attempt($username, $password);
-// 		if($result) {
-// 			header("Location: authorized.php");
-// 			die();
-// 		}
-// 	}
-// 	$attemptedUsername = inputHas('username') ? inputGet('username') : '';
-// 	$attemptedPassword = inputHas('password') ? inputGet('password') : '';
-// }
 
 	if ($_POST && Input::get('username', '') != '' && Input::get('password', '') != '') {
 		$user = new User;
