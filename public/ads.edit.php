@@ -1,6 +1,10 @@
 <?php 
 
+session_start();
 require_once "../bootstrap.php";
+
+var_dump($_SESSION);
+
 $message = 'Edit';
 $id_label = '';
 $selected_lang_origin = 0;
@@ -11,36 +15,6 @@ $selected_type_id = 0;
 $selected_luis_score = 0;
 
 // stuff when the page loads... (for editing)
-	function arrDimDown($arr_2D){
-
-		if (is_array($arr_2D[0])) {
-			
-			$arr_1D = [];
-
-			foreach ($arr_2D as $l1) {
-				foreach ($l1 as $l2) {
-					
-					array_push($arr_1D, $l2);
-				}
-			}	
-
-			return $arr_1D;
-		}
-
-		return $arr_2D;
-	}
-
-	function isSelected($current_option, $selected_option) {
-
-		$selection = '';
-		
-		if ($current_option == $selected_option) {
-			
-			$selection = "selected";
-		}
-
-		return $selection;
-	}
 
 	$lang_opts = Ad::all('lang', 'lang');
 	$lang_opts = arrDimDown($lang_opts);

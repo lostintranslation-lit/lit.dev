@@ -1,6 +1,8 @@
 <?php 
+session_start();
 include_once "../bootstrap.php";
 	
+	$button_com = ['',''];
 	$type = Input::get('type');
 
 	if (Input::has('type')) {
@@ -10,6 +12,12 @@ include_once "../bootstrap.php";
 	}
 
 	$n=1;
+
+	$ad_list=[];
+	if (array_key_exists('ad_list', $_SESSION)) {
+		$ad_list = $_SESSION['ad_list'];
+	}
+
 
 ?>
 
@@ -25,6 +33,7 @@ include_once "../bootstrap.php";
 		<?= $font_links;  ?>
 
 		<style type="text/css">
+
 
 			
 			#ad_index {
@@ -71,18 +80,17 @@ include_once "../bootstrap.php";
 				</tr>
 				
 				<?php foreach ($list_item as $key => $value):?>
-
-					<!-- <?php  $id = intval($value['id']) ?>	 -->
+					<?php $btn_show = htmlElmPermission($value['id'], $ad_list) ?>
 				<tr>
 					<td><?= $n++;  ?></td>
 					<td><a href="/ads.show.php?id=<?= $value['id']; ?> "><h3><?= $value['label']; ?></h3></a></td>
-					<td><img<?= ' src="img/Luis_Pic/' . Ad::getForKeyCol($id,'luis_score','luis','img_file') .'" ';?>style="width:50px;height:50px;"></td>
-					<td>
-						<form method="GET" action="ads.edit.php">
+					<td><img<?= ' src="img/Luis_Pic/' . Ad::getForKeyCol($value['id'],'luis_score','luis','img_file') .'" ';?>style="width:50px;height:50px;"></td>
+					<?= $btn_show[0]; ?><td>
+						 <form method="GET" action="ads.edit.php"> 
 							<button class="edit" name="id" value="<?= $value['id'] ?>">edit</button>
 						</form>
-						<button class="del" name="id" value="<?= $value['id'] ?>">delete</button>
-					</td>
+						<button class="del" name="id" value="<?= $value['id'] ?>">delete</button><?= $button_com[1]; ?>
+					</td><?= $btn_show[1]; ?>
 
 
 				</tr>
@@ -99,32 +107,6 @@ include_once "../bootstrap.php";
 			  // var edit = false;
 			  var del = false;
 			  var id;
-			  
-			  // $('.edit').on('click', function() {
-
-			  // 	id = $(this).val();
-
-			  // 	console.log(id);
-
-			  // 	edit = confirm("are you sure you want to leave the page to edit this entry?");
-			  // 	console.log(edit);
-
-			  // 	if (edit) {
-			  // 		console.log('in it to win it');
-			  // 		$.ajax({
-					//     url: "/js/ajax.php",
-					//     type: "GET",
-					//     data: {
-					//         modify:  'del',
-					//         id: id
-					//     }
-					// }).done(function(data){
-					// 	console.log(data);
-					// });
-			  // 	}
-
-			  // });
-
 
 			  $('.del').on('click', function() {
 

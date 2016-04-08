@@ -6,6 +6,7 @@ require_once 'models/BaseModel.php';
 require_once 'models/User.php';
 require_once 'models/Ad.php';
 require_once 'ads.action.php';
+require_once 'php_fun.php';
 
 
 // font links

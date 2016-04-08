@@ -23,6 +23,38 @@ class User extends BaseModel
             $this->attributes ['id'] = self::$dbc->lastInsertId();
     }
 
+    
+    //search for user
+    public function find()
+    {    
+      
+        if (array_key_exists('username', $this->attributes)) {
+          
+          $username = $this->attributes['username'];
+
+          self::dbConnect();
+        
+            $query = <<<EOD
+
+            SELECT id 
+            FROM user 
+            WHERE username = '$username';
+EOD;
+
+            $stmt = self::$dbc->query($query);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+            if (isset($result)) {
+                
+                return $result;
+
+            }
+                return NULL;
+        }
+    }
+
+
 /** If required, update existing entry in the database */
     protected function update()
     {
