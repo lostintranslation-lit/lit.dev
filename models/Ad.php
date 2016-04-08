@@ -36,7 +36,7 @@ class Ad extends BaseModel
     protected function insert()
     {
         
-        $stmt = self::$dbc->prepare('INSERT INTO lit (label, lang_origin, lang_trans, description, img_file, type_id, luis_score) VALUES (:label, :lang_origin, :lang_trans, :description, :img_file, :type_id, :luis_score)');
+        $stmt = self::$dbc->prepare('INSERT INTO lit (label, lang_origin, lang_trans, description, img_file, type_id, luis_score, user_edit) VALUES (:label, :lang_origin, :lang_trans, :description, :img_file, :type_id, :luis_score, :user_edit)');
 
             $stmt->bindValue(':label', $this->attributes['label'], PDO::PARAM_STR);
             $stmt->bindValue(':lang_origin',  $this->attributes['lang_origin'],  PDO::PARAM_INT);
@@ -45,6 +45,8 @@ class Ad extends BaseModel
             $stmt->bindValue(':img_file',  $this->attributes['img_file'],  PDO::PARAM_STR);
             $stmt->bindValue(':type_id',  $this->attributes['type_id'],  PDO::PARAM_INT);
             $stmt->bindValue(':luis_score',  $this->attributes['luis_score'],  PDO::PARAM_INT);
+            $stmt->bindValue(':user_edit',  $this->attributes['user_edit'],  PDO::PARAM_INT);
+
 
         $stmt->execute();
 
@@ -57,7 +59,7 @@ class Ad extends BaseModel
     {
        
 
-        $stmt = self::$dbc->prepare("UPDATE lit SET label = :label, lang_origin = :lang_origin, lang_trans = :lang_trans, description = :description, img_file = :img_file, type_id = :type_id, luis_score = :luis_score WHERE id = $id");
+        $stmt = self::$dbc->prepare("UPDATE lit SET label = :label, lang_origin = :lang_origin, lang_trans = :lang_trans, description = :description, img_file = :img_file, type_id = :type_id, luis_score = :luis_score, user_edit = :user_edit WHERE id = $id");
 
             $stmt->bindValue(':label', $this->attributes['label'], PDO::PARAM_STR);
             $stmt->bindValue(':lang_origin',  $this->attributes['lang_origin'],  PDO::PARAM_INT);
@@ -66,6 +68,7 @@ class Ad extends BaseModel
             $stmt->bindValue(':img_file',  $this->attributes['img_file'],  PDO::PARAM_STR);
             $stmt->bindValue(':type_id',  $this->attributes['type_id'],  PDO::PARAM_INT);
             $stmt->bindValue(':luis_score',  $this->attributes['luis_score'],  PDO::PARAM_INT);
+            $stmt->bindValue(':user_edit',  $this->attributes['user_edit'],  PDO::PARAM_INT);
 
         $stmt->execute();
          

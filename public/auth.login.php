@@ -2,55 +2,39 @@
 session_start();
 
 require_once "../bootstrap.php";
-var_dump($_SESSION);
 
 $msg = 'Login Form';
 if (array_key_exists('LOGGED_IN_USER', $_SESSION)) {
 	$msg = 'crazy - you are already logged in :)';
 }
 
-// function pageController()
-// {
-// 	if(Input::has('username') && Input::has('password')) {
-// 		$username = Input::get('username');
-// 		$password = Input::get('password');
-// 		$result = Auth::attempt($username, $password);
-// 		if($result) {
-// 			header("Location: authorized.php");
-// 			die();
-// 		}
-// 	}
-// 	$attemptedUsername = inputHas('username') ? inputGet('username') : '';
-// 	$attemptedPassword = inputHas('password') ? inputGet('password') : '';
-// }
+if ($_POST && Input::get('username', '') != '' && Input::get('password', '') != '') {
+	$user = new User;
+	$user->username = Input::get('username');
+	$user->password = Input::get('password');
 
-	if ($_POST && Input::get('username', '') != '' && Input::get('password', '') != '') {
-		$user = new User;
-		$user->username = Input::get('username');
-		$user->password = Input::get('password');
+	$user_id = $user->find();
+	if (!is_null($user_id)) {
 
-		$user_id = $user->find();
-		if (!is_null($user_id)) {
+		$user_id = $user_id['id'];
+		if (Auth::attempt('guest', 'password')) {
 
-			$user_id = $user_id['id'];
-			if (Auth::attempt('guest', 'password')) {
-
-				$arr = Ad::getFromForKey('id', 'user_edit', 'user', 'id', $user_id);
+			$arr = Ad::getFromForKey('id', 'user_edit', 'user', 'id', $user_id);
+			
+			if (!empty($arr)) {
 				
-				if (!empty($arr)) {
-					
-					$arr = arrDimDown($arr);
+				$arr = arrDimDown($arr);
 
-				}
-
-				Auth::setAds($arr);
 			}
-			$msg = "Hello! sucessful Login my friend";
 
-		} else {
-			$msg = "Hey! Your username and password don't match what's on file!";
+			Auth::setAds($arr);
 		}
+		$msg = "Hello! sucessful Login my friend";
+
+	} else {
+		$msg = "Hey! Your username and password don't match what's on file!";
 	}
+}
 
 ?>
 

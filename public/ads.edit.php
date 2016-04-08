@@ -3,8 +3,6 @@
 session_start();
 require_once "../bootstrap.php";
 
-var_dump($_SESSION);
-
 $message = 'Edit';
 $id_label = '';
 $selected_lang_origin = 0;
@@ -13,6 +11,7 @@ $id_description = '';
 $id_img_file = 0;
 $selected_type_id = 0;
 $selected_luis_score = 0;
+$id_user_edit = 1;
 
 // stuff when the page loads... (for editing)
 
@@ -43,8 +42,7 @@ $selected_luis_score = 0;
 		$id = Input::get('id');
 		
 		$id_item = Ad::getById('*', $id);
-		var_dump($id_item);
-
+		
 		$id_label = $id_item[0]['label'];
 		$selected_lang_origin = $id_item[0]['lang_origin'];
 		$selected_lang_trans = $id_item[0]['lang_trans'];
@@ -52,6 +50,7 @@ $selected_luis_score = 0;
 		$id_img_file = $id_item[0]['img_file'];
 		$selected_type_id = $id_item[0]['type_id'];
 		$selected_luis_score = $id_item[0]['luis_score'];
+		$id_user_edit = $id_item[0]['user_edit'];
 
 
 	}
@@ -63,13 +62,10 @@ $selected_luis_score = 0;
             $value = Input::escape($value);
         }
 
-		$new_item = new Ad($_POST);
-
-		
+	$new_item = new Ad($_POST);
 
 
 		// file uploads
-		var_dump($_FILES);
 		if ($_FILES['img_raw']['error'] != 4) {
 			
 			$uploaddir = 'img/ads.img/';
@@ -101,6 +97,19 @@ $selected_luis_score = 0;
 				
 			}
 			
+			if (Auth::attempt('guest', 'password')) {
+
+			$arr = Ad::getFromForKey('id', 'user_edit', 'user', 'id', $id_user_edit);
+				
+				if (!empty($arr)) {
+					
+					$arr = arrDimDown($arr);
+
+				}
+
+				Auth::setAds($arr);
+			}
+
 			$message = "Item submitted - Sucess Ninja!";
 		} else {
 
@@ -110,7 +119,6 @@ $selected_luis_score = 0;
 	}
 
 
-var_dump($id_description);
 
 ?>
 
@@ -136,6 +144,7 @@ var_dump($id_description);
 		<div class="questions page_content">
 			<form id="page_form" method="POST" enctype="multipart/form-data">
 
+	        	<input type="hidden" name="user_edit" value="<?= $id_user_edit; ?>" />
 	        	<input type="text" name="label" placeholder="Enter Label" value="<?= $id_label; ?>">
 	        	
 				<p><select id="lang_origin" name="lang_origin">

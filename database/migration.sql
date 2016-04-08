@@ -44,7 +44,7 @@ CREATE TABLE luis (
 );
 
 TRUNCATE luis;
-INSERT INTO luis (score, img_file) VALUES ('meh', '2.png'),('facepalm', '5.p ng');
+INSERT INTO luis (score, img_file) VALUES ('meh', '2.png'),('facepalm', '5.png');
 
 
 -- table of users and passwords
