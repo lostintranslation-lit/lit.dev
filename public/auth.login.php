@@ -52,17 +52,14 @@ $error = '';
 		<h1>Log In</h1>
 
 		<form method="POST">
-        	<p>
-	        	<label for="username">Username:</label>
-	        	<input type="text" id="username" name="username" placeholder="Enter your username">
-	        </p>
-	        <p>
-        		<label for="password">Password:</label>
-        		<input type="password" id="password" name="password" placeholder="Enter your password">
-        	</p>
-        	<p>
-        		<input type="submit">
-    		</p>
+        	
+	        	<p><label for="username">Username:</label>
+	        	<input type="text" id="username" name="username" placeholder="Enter your username"></p>
+	        	       
+        		 <p><label for="password">Password:</label>
+        		<input type="text" id="password" name="password" placeholder="Enter your password"></p>  	
+        	
+        		<p><input type="submit"></p>  		
 
         	<h4>or</h4>
 
@@ -78,7 +75,6 @@ $error = '';
 
 			<p align='center'><img src="/img/Luis_Pic/7.png" alt="Luis" style="width:400px;height:400px;"/></p>
 		<layer id="placeholderlayer"></layer><div id="placeholderdiv"></div>
-
 
 	</body>
 
